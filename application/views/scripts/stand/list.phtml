@@ -1,1 +1,22 @@
-<br /><br /><center>View script for controller <b>Stand</b> and script/action name <b>list</b></center>
+<?php
+
+$stands = $this->stands;
+
+?>
+
+<p>
+    <a href="<?php echo $this->url(array('action' => 'create')); ?>">Add New Stand</a>
+</p>
+
+
+<?php if ($stands): foreach ($stands as $stand): ?>
+    ID<?php echo $stand->id ?>: 
+    <a href="<?php echo $this->url(array('action' => 'edit', 'id' => $stand->id)); ?>">
+        <?php echo $stand->name; ?>
+    </a>
+    - 
+    <a href="<?php echo $this->url(array('action' => 'delete', 'id' => $stand->id)); ?>">
+        delete
+    </a>
+    <br />
+<?php endforeach; endif; ?>

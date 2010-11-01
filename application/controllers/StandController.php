@@ -10,27 +10,69 @@ class StandController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body
+        $this->_forward('list');
     }
 
     public function createAction()
     {
-        // action body
+        $form = new Application_Form_Stand();
+        if ($this->getRequest()->isPost() && $form->isValid($_POST)) {
+        	$standTable = new Application_Model_DbTable_Stand();
+        	$standValues = $form->getValues();
+        	unset($standValues['id']);
+            $stand = $standTable->createRow($standValues);
+            $stand->save();
+            
+            $this->_helper->flashMessenger->addMessage('Stand saved.');
+            return $this->_redirect('/stand/list');
+        }
+        
+        $this->view->form = $form;
     }
 
     public function listAction()
     {
-        // action body
+    	$standTable = new Application_Model_DbTable_Stand();
+        $this->view->stands = $standTable->fetchAll();
     }
 
     public function editAction()
     {
-        // action body
+        $form = new Application_Form_Stand();
+        
+        $id = $this->getRequest()->getParam('id');
+        if ($id == null) {
+            throw new Exception('Id must be provided for the edit action');
+        }
+            
+        $standTable = new Application_Model_DbTable_Stand();
+        $stand = $standTable->find($id)->current();
+        
+        if ($this->getRequest()->isPost() && $form->isValid($_POST)) {
+            $stand->setArray($form->getValues());
+            $stand->save();
+            $this->_helper->flashMessenger->addMessage('Stand saved.');
+            return $this->_redirect('/stand/list');
+        }
+        
+        $form->setDefaults($stand->toArray()); // pass values to form
+        
+        $this->view->form = $form;
     }
 
     public function deleteAction()
     {
-        // action body
+        $id = $this->getRequest()->getParam('id');
+        if ($id == null) {
+            throw new Exception('Id must be provided for the edit action');
+        }
+        
+        $standTable = new Application_Model_DbTable_Stand();
+        $stand = $standTable->find($id)->current();
+        
+        $stand->delete();
+        $this->_helper->flashMessenger->addMessage('Stand deleted.');
+        return $this->_redirect('/stand/list');
     }
 
 
