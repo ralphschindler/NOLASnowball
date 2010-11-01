@@ -54,6 +54,7 @@ class AuthController extends Zend_Controller_Action
     public function logoutAction()
     {
         // action body
+        $this->_auth->clearIdentity();
     }
 
 }

@@ -30,11 +30,11 @@ class Application_Model_AuthenticationService
         
         $userInfo = $adapter->getResultRowObject(array('id', 'username'));
         
-        $userService = new Application_Model_UserService();
-        $currentUser = $userService->getCurrentUserById($userInfo->id);
+        $q = Doctrine_Query::create()->from('User u')->where('u.id = ?', $userInfo->id);
+        $currentUser = $q->fetchOne();
         
         // Store all user details except password in authentication session
-        $auth->getStorage()->write($currentUser);
+        $auth->getStorage()->write($currentUser->toArray());
         return $authResult;
     }
 

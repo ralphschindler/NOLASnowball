@@ -13,10 +13,17 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initAuth()
     {
         $this->bootstrap('session');
+        $this->bootstrap('doctrine');
         $auth = Zend_Auth::getInstance();
         if ($auth->hasIdentity()) {
             $view = $this->getResource('view');
-            $view->user = $auth->getIdentity();
+            
+            // doctrine integration
+            $user = new User();
+            $user->fromArray($auth->getIdentity());
+            
+            $view->user = $user;
+            Zend_Registry::set('user', $user);
         }
         return $auth;
     }

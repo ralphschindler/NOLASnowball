@@ -2,7 +2,7 @@
 
 $username = 'Guest';
 if (isset($this->user)) {
-    $username = $this->user->realName;
+    $username = $this->user->first_name . ' ' . $this->user->last_name;
 }
 
 $applicationName = (isset($this->applicationName)) ? $this->applicationName : 'Snowball Application';

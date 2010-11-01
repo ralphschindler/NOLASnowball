@@ -99,7 +99,7 @@ class Application_Form_Stand extends Zend_Form
         
         $this->addElement(
             'text',
-            'zipCode',
+            'zip_code',
             array(
                 'label'     => 'Zip Code',
                 'size'      => 5,
