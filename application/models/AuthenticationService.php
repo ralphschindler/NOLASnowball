@@ -30,11 +30,11 @@ class Application_Model_AuthenticationService
         
         $userInfo = $adapter->getResultRowObject(array('id', 'username'));
         
-        $userService = new Application_Model_UserService();
-        $currentUser = $userService->getCurrentUserById($userInfo->id);
+        $userTable = new Application_Model_DbTable_User();
+        $user = $userTable->find($userInfo->id)->current();
         
         // Store all user details except password in authentication session
-        $auth->getStorage()->write($currentUser);
+        $auth->getStorage()->write($user);
         return $authResult;
     }
 
