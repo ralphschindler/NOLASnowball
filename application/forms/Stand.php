@@ -130,6 +130,19 @@ class Application_Form_Stand extends Zend_Form
             'Form',
             ));
     }
+    
+    public function setDefaultsFromEntity(\NOLASnowball\Entity\Stand $stand)
+    {
+        $values = array(
+            'id' => $stand->getId(),
+            'name' => $stand->getName(),
+            'address' => $stand->getAddress(),
+            'city' => $stand->getCity(),
+            'state' => $stand->getState(),
+            'zipCode' => $stand->getZipCode()
+            );
+        $this->setDefaults($values);
+    }
 
 
 }

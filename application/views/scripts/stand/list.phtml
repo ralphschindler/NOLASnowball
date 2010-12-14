@@ -1,0 +1,22 @@
+<?php
+
+$stands = $this->stands;
+
+?>
+
+<p>
+    <a href="<?php echo $this->url(array('action' => 'create')); ?>">Add New Stand</a>
+</p>
+
+
+<?php if ($stands): foreach ($stands as $stand): ?>
+    ID<?php echo $stand->getId() ?>: 
+    <a href="<?php echo $this->url(array('action' => 'edit', 'id' => $stand->getId())); ?>">
+        <?php echo $stand->getName(); ?>
+    </a>
+    - 
+    <a href="<?php echo $this->url(array('action' => 'delete', 'id' => $stand->getId())); ?>">
+        delete
+    </a>
+    <br />
+<?php endforeach; endif; ?>
