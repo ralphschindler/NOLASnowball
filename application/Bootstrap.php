@@ -40,8 +40,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $bisnaAutoloader = new \Doctrine\Common\ClassLoader('Bisna');
         $autoloader->pushAutoloader(array($bisnaAutoloader, 'loadClass'), 'Bisna');
 
-        $appAutoloader = new \Doctrine\Common\ClassLoader('application', dirname(APPLICATION_PATH));
-        $autoloader->pushAutoloader(array($appAutoloader, 'loadClass'), 'application');
+        $appAutoloader = new \Doctrine\Common\ClassLoader('NOLASnowball');
+        $autoloader->pushAutoloader(array($appAutoloader, 'loadClass'), 'NOLASnowball');
     }
 
 }
