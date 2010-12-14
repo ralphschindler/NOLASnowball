@@ -2,7 +2,8 @@
 
 namespace NOLASnowball\Entity\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityRepository,
+    NOLASnowball\Entity\Stand;
 
 /**
  * StandRepository
@@ -12,4 +13,22 @@ use Doctrine\ORM\EntityRepository;
  */
 class StandRepository extends EntityRepository
 {
+    public function saveStand(Stand $stand, array $values)
+    {
+        $stand->setName($values['name']);
+        $stand->setAddress($values['address']);
+        $stand->setCity($values['city']);
+        $stand->setState($values['state']);
+        $stand->setZipCode($values['zipCode']);
+
+        $this->getEntityManager()->persist($stand);
+    }
+
+    public function removeStand($id)
+    {
+        $em    = $this->getEntityManager();
+        $proxy = $em->getReference('\NOLASnowball\Entity\Stand', $id);
+
+        $em->remove($proxy);
+    }
 }
