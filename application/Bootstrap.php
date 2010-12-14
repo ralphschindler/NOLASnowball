@@ -36,8 +36,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         require_once APPLICATION_PATH . '/../library/Doctrine/Common/ClassLoader.php';
 
         $autoloader = \Zend_Loader_Autoloader::getInstance();
-        $fmmAutoloader = new \Doctrine\Common\ClassLoader('Bisna');
-        $autoloader->pushAutoloader(array($fmmAutoloader, 'loadClass'), 'Bisna');
+
+        $bisnaAutoloader = new \Doctrine\Common\ClassLoader('Bisna');
+        $autoloader->pushAutoloader(array($bisnaAutoloader, 'loadClass'), 'Bisna');
+
+        $appAutoloader = new \Doctrine\Common\ClassLoader('application', dirname(APPLICATION_PATH));
+        $autoloader->pushAutoloader(array($appAutoloader, 'loadClass'), 'application');
     }
 
 }
