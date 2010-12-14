@@ -1,0 +1,30 @@
+Useful Commands:
+
+    Ensure Production Settings Are Ok
+
+        php scripts/doctrine.php orm:ensure-production-settings
+        
+    Dump the SQL for creating the Db
+    
+        php scripts/doctrine.php orm:schema-tool:create --dump-sql
+        
+    Actually create the database
+    
+        php scripts/doctrine.php orm:schema-tool:create
+        
+    Modify the structure
+    
+        php scripts/doctrine.php orm:schema-tool:update --dump-sql
+        php scripts/doctrine.php orm:schema-tool:update
+        
+    Generate Proxy Classes
+        
+        php scripts/doctrine.php orm:generate-proxies
+    
+    Generate Repository Classes
+    
+        php scripts/doctrine.php orm:generate-repositories library/
+        
+        
+        
+        

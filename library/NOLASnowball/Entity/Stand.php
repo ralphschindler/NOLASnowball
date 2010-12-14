@@ -4,7 +4,6 @@ namespace NOLASnowball\Entity;
 
 /**
  * @Entity(repositoryClass="NOLASnowball\Entity\Repository\StandRepository")
- * @Table(name="stands")
  */
 class Stand
 {
